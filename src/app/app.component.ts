@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CanvasService } from './canvas/canvas.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'nextFrontendTest';
+  constructor(public canvasService: CanvasService) { }
+
+  save() {
+    this.canvasService.saveToStorage();
+  }
+
 }

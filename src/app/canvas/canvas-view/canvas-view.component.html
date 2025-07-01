@@ -1,0 +1,45 @@
+<div class="canvas-area container-fluid bg-light border rounded shadow-sm p-3" *ngIf="selectedCanvas; else noCanvas">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="fw-semibold text-primary m-0">{{ selectedCanvas.name }}</h4>
+        <div class="btn-group">
+            <button class="btn btn-outline-primary btn-sm" (click)="addWidget('text')">
+                <i class="fa-solid fa-plus"></i>
+                Text
+            </button>
+            <button class="btn btn-outline-success btn-sm" (click)="addWidget('image')">
+                <i class="fa-solid fa-image"></i> 
+                Image
+            </button>
+            <button class="btn btn-outline-warning btn-sm" (click)="addWidget('table')">
+                <i class="fa-solid fa-table-cells"></i>
+                Table
+            </button>
+        </div>
+    </div>
+
+    <div class="position-relative canvas-inner">
+        <ng-container *ngFor="let widget of selectedCanvas?.widgets">
+            <div class="widget-box border rounded bg-white shadow-sm position-absolute"
+                [style.top.px]="widget.position.top" [style.left.px]="widget.position.left" appDraggable
+                [widgetId]="widget.id">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <small class="text-muted text-uppercase">{{ widget.type }}</small>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary me-1" (click)="openSettings(widget)">⚙️</button>
+                        <button class="btn btn-sm btn-outline-danger" (click)="removeWidget(widget.id)">❌</button>
+                    </div>
+                </div>
+
+                <ng-container [ngSwitch]="widget.type">
+                    <app-text-widget *ngSwitchCase="'text'"></app-text-widget>
+                    <app-image-widget *ngSwitchCase="'image'"></app-image-widget>
+                    <app-table-widget *ngSwitchCase="'table'"></app-table-widget>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #noCanvas>
+    <div class="alert alert-info text-center">Please select a canvas to begin.</div>
+</ng-template>

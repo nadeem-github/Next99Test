@@ -1,0 +1,27 @@
+<div class="canvas-sidebar p-3 border-end bg-white">
+    <h5 class="text-dark mb-3">🖼️ Canvases</h5>
+
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center px-2"
+            *ngFor="let canvas of canvases$ | async">
+            <span class="text-truncate text-primary fw-bold text-truncate" role="button" (click)="selectCanvas(canvas.id)">
+                {{ canvas.name }}
+            </span>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteCanvas(canvas.id)">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </li>
+    </ul>
+
+    <form [formGroup]="canvasForm" (ngSubmit)="addCanvas()" class="input-group">
+        <input type="text" formControlName="name" class="form-control form-control-sm" placeholder="New canvas name"
+            [class.is-invalid]="canvasForm.get('name')?.invalid && canvasForm.get('name')?.touched" />
+        <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="canvasForm.invalid">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </form>
+
+    <div class="text-danger small mt-1" *ngIf="canvasForm.get('name')?.invalid && canvasForm.get('name')?.touched">
+        Name is required and max 50 chars.
+    </div>
+</div>

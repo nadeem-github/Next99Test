@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h5 class="modal-title">🛠️ Widget Settings</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+
+<div class="modal-body">
+    <ng-container [ngSwitch]="widget.type">
+        <div *ngSwitchCase="'text'" class="mb-3">
+            <label class="form-label">Text Size</label>
+            <input [(ngModel)]="widget.config.size" type="number" class="form-control" />
+        </div>
+
+        <div *ngSwitchCase="'image'" class="mb-3">
+            <label class="form-label">Image URL</label>
+            <input [(ngModel)]="widget.config.url" type="text" class="form-control" />
+        </div>
+
+        <div *ngSwitchCase="'table'">
+            <p>No configuration available.</p>
+        </div>
+    </ng-container>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-outline-secondary" (click)="activeModal.dismiss()">Cancel</button>
+    <button class="btn btn-primary" (click)="activeModal.close(widget)">Save</button>
+</div>

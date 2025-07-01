@@ -1,0 +1,4 @@
+<div class="image-widget">
+    <input class="form-control mb-2" type="file" (change)="onImageChange($event)" />
+    <img *ngIf="imageUrl" [src]="imageUrl" class="img-fluid rounded border" />
+</div>
