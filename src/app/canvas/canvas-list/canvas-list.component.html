@@ -17,13 +17,13 @@
     <div class="card shadow-sm">
         <div class="card-body p-2">
             <form [formGroup]="canvasForm" (ngSubmit)="addCanvas()" class="input-group">
-                <input type="text" formControlName="name" class="form-control shadow-none" placeholder="New canvas name"
-                    [class.is-invalid]="canvasForm.get('name')?.invalid && canvasForm.get('name')?.touched" />
-                <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="canvasForm.invalid">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="text-danger small mt-1"
-                    *ngIf="canvasForm.get('name')?.invalid && canvasForm.get('name')?.touched">
+                <div class="input-group">
+                    <input type="text" formControlName="name" class="form-control shadow-none" placeholder="New canvas name" [class.is-invalid]="canvasForm.get('name')?.invalid && canvasForm.get('name')?.touched" />
+                    <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="canvasForm.invalid">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <div class="text-danger small mt-1" *ngIf="canvasForm.get('name')?.invalid && canvasForm.get('name')?.touched">
                     Name is required and max 50 chars.
                 </div>
             </form>
